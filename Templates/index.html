@@ -1,0 +1,192 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Price Comparison</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="header">
+
+        <div class="logo">
+            🛒 Smart Price Comparison
+        </div>
+
+        <p>
+            Compare Amazon & Flipkart prices in one place
+        </p>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN CONTAINER
+    ====================================================== -->
+
+    <main class="container">
+
+        <!-- Search Section -->
+
+        <section class="search-section">
+
+            <h1>Find the Best Price</h1>
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search for a product..."
+                >
+
+                <button onclick="searchProducts()">
+                    🔍 Search
+                </button>
+
+            </div>
+
+            <!-- Category Filter -->
+
+            <div class="categories">
+
+                <button onclick="loadProducts()">
+                    All
+                </button>
+
+                <button onclick="loadCategory('Mobiles')">
+                    📱 Mobiles
+                </button>
+
+                <button onclick="loadCategory('Laptops')">
+                    💻 Laptops
+                </button>
+
+                <button onclick="loadCategory('Earphones')">
+                    🎧 Earphones
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             STATISTICS
+        ================================================== -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+
+                <h3 id="totalProducts">
+                    0
+                </h3>
+
+                <p>Total Products</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3 id="amazonCheaper">
+                    0
+                </h3>
+
+                <p>Amazon Cheaper</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3 id="flipkartCheaper">
+                    0
+                </h3>
+
+                <p>Flipkart Cheaper</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3 id="samePrice">
+                    0
+                </h3>
+
+                <p>Same Price</p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PRODUCTS
+        ================================================== -->
+
+        <section>
+
+            <div class="section-title">
+
+                <h2>Price Comparisons</h2>
+
+                <span id="resultCount">
+                    Loading...
+                </span>
+
+            </div>
+
+
+            <div id="productsContainer"
+                 class="products-container">
+
+                <div class="loading">
+                    Loading products...
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+        <p>
+            Smart Price Comparison System
+        </p>
+
+        <p>
+            Powered by TF-IDF & Cosine Similarity
+        </p>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
+```

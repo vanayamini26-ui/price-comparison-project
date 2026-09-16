@@ -1,0 +1,502 @@
+
+/* ============================================================
+   Smart Price Comparison - Main Styles
+   ============================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fb;
+    color: #222;
+}
+
+
+/* ============================================================
+   Header
+   ============================================================ */
+
+.header {
+    background: #111827;
+    color: white;
+    text-align: center;
+    padding: 28px 20px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.header p {
+    color: #d1d5db;
+    font-size: 15px;
+}
+
+
+/* ============================================================
+   Main Container
+   ============================================================ */
+
+.container {
+    width: 92%;
+    max-width: 1200px;
+    margin: 30px auto;
+}
+
+
+/* ============================================================
+   Search Section
+   ============================================================ */
+
+.search-section {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+    text-align: center;
+}
+
+.search-section h1 {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+
+.search-box {
+    display: flex;
+    max-width: 750px;
+    margin: auto;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 15px 18px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px 0 0 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+.search-box input:focus {
+    border-color: #2563eb;
+}
+
+.search-box button {
+    border: none;
+    padding: 0 25px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 0 10px 10px 0;
+    cursor: pointer;
+}
+
+.search-box button:hover {
+    background: #1d4ed8;
+}
+
+
+/* ============================================================
+   Categories
+   ============================================================ */
+
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.categories button {
+    border: 1px solid #d1d5db;
+    background: white;
+    padding: 9px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.categories button:hover {
+    background: #111827;
+    color: white;
+}
+
+
+/* ============================================================
+   Statistics
+   ============================================================ */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin: 25px 0;
+}
+
+.stat-card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.05);
+}
+
+.stat-card h3 {
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.stat-card p {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+
+/* ============================================================
+   Section Title
+   ============================================================ */
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 0 18px;
+}
+
+.section-title h2 {
+    font-size: 24px;
+}
+
+#resultCount {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+
+/* ============================================================
+   Product Grid
+   ============================================================ */
+
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+
+/* ============================================================
+   Product Card
+   ============================================================ */
+
+.product-card {
+    position: relative;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+
+/* ============================================================
+   Product Image
+   ============================================================ */
+
+.product-image-container {
+    height: 220px;
+    background: #f9fafb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-image {
+    max-width: 85%;
+    max-height: 200px;
+    object-fit: contain;
+}
+
+.image-placeholder {
+    font-size: 60px;
+    color: #9ca3af;
+}
+
+
+/* ============================================================
+   Product Content
+   ============================================================ */
+
+.product-content {
+    padding: 20px;
+}
+
+.product-name {
+    font-size: 18px;
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+
+.category {
+    color: #6b7280;
+    font-size: 13px;
+    margin-bottom: 18px;
+}
+
+
+/* ============================================================
+   Cheaper Badge
+   ============================================================ */
+
+.cheaper-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 2;
+    padding: 7px 12px;
+    border-radius: 20px;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.amazon-badge {
+    background: #f59e0b;
+}
+
+.flipkart-badge {
+    background: #2563eb;
+}
+
+.same-badge {
+    background: #6b7280;
+}
+
+
+/* ============================================================
+   Comparison
+   ============================================================ */
+
+.comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.store {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+}
+
+.amazon-store {
+    background: #fffaf0;
+}
+
+.flipkart-store {
+    background: #f5f9ff;
+}
+
+.store-name {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.price {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+
+/* ============================================================
+   View Buttons
+   ============================================================ */
+
+.view-button {
+    display: block;
+    text-decoration: none;
+    padding: 9px;
+    border-radius: 8px;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.amazon-button {
+    background: #f59e0b;
+}
+
+.amazon-button:hover {
+    background: #d97706;
+}
+
+.flipkart-button {
+    background: #2563eb;
+}
+
+.flipkart-button:hover {
+    background: #1d4ed8;
+}
+
+
+/* ============================================================
+   Product Footer
+   ============================================================ */
+
+.product-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 18px;
+    padding-top: 15px;
+    border-top: 1px solid #e5e7eb;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.product-footer strong {
+    color: #111827;
+}
+
+
+/* ============================================================
+   Loading
+   ============================================================ */
+
+.loading {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px;
+    color: #6b7280;
+}
+
+.spinner {
+    width: 35px;
+    height: 35px;
+    border: 4px solid #e5e7eb;
+    border-top-color: #2563eb;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 15px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* ============================================================
+   No Results / Error
+   ============================================================ */
+
+.no-results,
+.error-message {
+    grid-column: 1 / -1;
+    background: white;
+    text-align: center;
+    padding: 50px;
+    border-radius: 14px;
+}
+
+.no-results h3,
+.error-message h3 {
+    margin-bottom: 8px;
+}
+
+.no-results p,
+.error-message p {
+    color: #6b7280;
+}
+
+
+/* ============================================================
+   Footer
+   ============================================================ */
+
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 40px;
+    background: #111827;
+    color: white;
+}
+
+footer p {
+    margin: 5px;
+    font-size: 13px;
+    color: #d1d5db;
+}
+
+
+/* ============================================================
+   Responsive Design
+   ============================================================ */
+
+@media (max-width: 800px) {
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .products-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .container {
+        width: 95%;
+    }
+
+    .search-section {
+        padding: 20px;
+    }
+
+    .search-section h1 {
+        font-size: 24px;
+    }
+
+    .search-box input {
+        min-width: 0;
+    }
+
+    .search-box button {
+        padding: 0 15px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .comparison {
+        grid-template-columns: 1fr;
+    }
+
+    .product-footer {
+        flex-direction: column;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+}
+
