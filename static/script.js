@@ -1,32 +1,28 @@
-
 // ============================================================
-// Smart Price Comparison - Frontend JavaScript
+// PRICEWISE - PRODUCT PAGE SCRIPT
 // ============================================================
-
-const API_BASE = "/api";
 
 
 // ============================================================
-// Page Load
+// GLOBAL DATA
+// ============================================================
+
+let allProducts = [];
+
+
+// ============================================================
+// PAGE LOAD
 // ============================================================
 
 document.addEventListener("DOMContentLoaded", function () {
+
     loadProducts();
-    loadStatistics();
 
-    // Search when Enter key is pressed
-    const searchInput = document.getElementById("searchInput");
-
-    searchInput.addEventListener("keypress", function (event) {
-        if (event.key === "Enter") {
-            searchProducts();
-        }
-    });
 });
 
 
 // ============================================================
-// Load All Products
+// LOAD ALL PRODUCTS
 // ============================================================
 
 async function loadProducts() {
@@ -35,145 +31,35 @@ async function loadProducts() {
 
     try {
 
-        const response = await fetch(`${API_BASE}/products`);
+        const response = await fetch("/api/products");
 
         if (!response.ok) {
-            throw new Error("Failed to load products");
+            throw new Error("Unable to load products");
         }
 
         const data = await response.json();
 
-        displayProducts(data.products);
+        allProducts = data.products || [];
 
-        updateResultCount(data.count);
+        displayProducts(allProducts);
 
-    } catch (error) {
+    }
 
-        console.error("Error:", error);
+    catch (error) {
+
+        console.error(error);
 
         showError(
-            "Unable to load products. Please make sure Flask server is running."
+            "Unable to load products. Please try again."
         );
+
     }
+
 }
 
 
 // ============================================================
-// Search Products
-// ============================================================
-
-async function searchProducts() {
-
-    const input = document.getElementById("searchInput");
-
-    const query = input.value.trim();
-
-    if (!query) {
-
-        loadProducts();
-
-        return;
-    }
-
-    showLoading();
-
-    try {
-
-        const response = await fetch(
-            `${API_BASE}/search?q=${encodeURIComponent(query)}`
-        );
-
-        if (!response.ok) {
-            throw new Error("Search failed");
-        }
-
-        const data = await response.json();
-
-        displayProducts(data.products);
-
-        updateResultCount(data.count);
-
-    } catch (error) {
-
-        console.error("Search error:", error);
-
-        showError("Something went wrong while searching.");
-    }
-}
-
-
-// ============================================================
-// Load Products by Category
-// ============================================================
-
-async function loadCategory(category) {
-
-    showLoading();
-
-    try {
-
-        const response = await fetch(
-            `${API_BASE}/category/${encodeURIComponent(category)}`
-        );
-
-        if (!response.ok) {
-            throw new Error("Category request failed");
-        }
-
-        const data = await response.json();
-
-        displayProducts(data.products);
-
-        updateResultCount(data.count);
-
-    } catch (error) {
-
-        console.error("Category error:", error);
-
-        showError("Unable to load this category.");
-    }
-}
-
-
-// ============================================================
-// Load Statistics
-// ============================================================
-
-async function loadStatistics() {
-
-    try {
-
-        const response = await fetch(
-            `${API_BASE}/statistics`
-        );
-
-        if (!response.ok) {
-            throw new Error("Statistics request failed");
-        }
-
-        const data = await response.json();
-
-        document.getElementById("totalProducts").textContent =
-            data.total_products;
-
-        document.getElementById("amazonCheaper").textContent =
-            data.amazon_cheaper;
-
-        document.getElementById("flipkartCheaper").textContent =
-            data.flipkart_cheaper;
-
-        document.getElementById("samePrice").textContent =
-            data.same_price;
-
-    } catch (error) {
-
-        console.error("Statistics error:", error);
-    }
-}
-
-
-// ============================================================
-// Display Products
+// DISPLAY PRODUCTS
 // ============================================================
 
 function displayProducts(products) {
@@ -181,360 +67,771 @@ function displayProducts(products) {
     const container =
         document.getElementById("productsContainer");
 
+    if (!container) {
+        return;
+    }
+
+
     container.innerHTML = "";
+
 
     if (!products || products.length === 0) {
 
         container.innerHTML = `
-            <div class="no-results">
+            <div class="no-products">
                 <h3>No products found</h3>
-                <p>Try another product name.</p>
+                <p>Try another product name or category.</p>
             </div>
         `;
 
+        updateResultCount();
+
         return;
+
     }
 
 
     products.forEach(function (product) {
 
-        const card = createProductCard(product);
+        const card =
+            createProductCard(product);
 
         container.appendChild(card);
 
     });
+
+
+    // IMPORTANT:
+    // We intentionally do NOT show the product count.
+
+    updateResultCount();
+
 }
 
 
 // ============================================================
-// Create Product Card
+// CREATE PRODUCT CARD
 // ============================================================
 
 function createProductCard(product) {
 
-    const card = document.createElement("div");
+    const card =
+        document.createElement("div");
 
     card.className = "product-card";
 
 
-    // --------------------------------------------------------
-    // Prices
-    // --------------------------------------------------------
-
     const amazonPrice =
-        Number(product.amazon_price) || 0;
+        Number(product.amazon_price || 0);
 
     const flipkartPrice =
-        Number(product.flipkart_price) || 0;
+        Number(product.flipkart_price || 0);
 
 
-    // --------------------------------------------------------
-    // Determine Cheaper Platform
-    // --------------------------------------------------------
-
-    let cheaperPlatform = "Same Price";
+    let cheaperPlatform = "";
 
     let savings = 0;
 
-    if (amazonPrice < flipkartPrice) {
 
-        cheaperPlatform = "Amazon";
+    if (
+        amazonPrice > 0 &&
+        flipkartPrice > 0
+    ) {
 
-        savings = flipkartPrice - amazonPrice;
+        if (amazonPrice < flipkartPrice) {
 
-    } else if (flipkartPrice < amazonPrice) {
+            cheaperPlatform = "Amazon";
 
-        cheaperPlatform = "Flipkart";
+            savings =
+                flipkartPrice - amazonPrice;
 
-        savings = amazonPrice - flipkartPrice;
+        }
+
+        else if (flipkartPrice < amazonPrice) {
+
+            cheaperPlatform = "Flipkart";
+
+            savings =
+                amazonPrice - flipkartPrice;
+
+        }
+
+        else {
+
+            cheaperPlatform = "Same Price";
+
+            savings = 0;
+
+        }
+
     }
 
 
-    // --------------------------------------------------------
-    // Image
-    // --------------------------------------------------------
-
     const imageUrl =
+        product.image_url ||
+        product.product_image ||
         product.amazon_image ||
         product.flipkart_image ||
         "";
 
 
-    // --------------------------------------------------------
-    // Image HTML
-    // --------------------------------------------------------
-
-    let imageHTML = "";
-
-    if (imageUrl) {
-
-        imageHTML = `
-            <img
-                src="${escapeHTML(imageUrl)}"
-                alt="Product"
-                class="product-image"
-                onerror="this.style.display='none'"
-            >
-        `;
-
-    } else {
-
-        imageHTML = `
-            <div class="image-placeholder">
-                🛒
-            </div>
-        `;
-    }
+    const productName =
+        product.amazon_product ||
+        product.flipkart_product ||
+        "Electronic Product";
 
 
-    // --------------------------------------------------------
-    // Amazon Link
-    // --------------------------------------------------------
-
-    let amazonLink = "";
-
-    if (product.amazon_url) {
-
-        amazonLink = `
-            <a
-                href="${escapeHTML(product.amazon_url)}"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="view-button amazon-button"
-            >
-                View on Amazon
-            </a>
-        `;
-    }
+    const category =
+        product.category ||
+        "Electronics";
 
 
-    // --------------------------------------------------------
-    // Flipkart Link
-    // --------------------------------------------------------
-
-    let flipkartLink = "";
-
-    if (product.flipkart_url) {
-
-        flipkartLink = `
-            <a
-                href="${escapeHTML(product.flipkart_url)}"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="view-button flipkart-button"
-            >
-                View on Flipkart
-            </a>
-        `;
-    }
+    const amazonLink =
+        product.amazon_url ||
+        product.amazon_link ||
+        "#";
 
 
-    // --------------------------------------------------------
-    // Cheaper Badge
-    // --------------------------------------------------------
+    const flipkartLink =
+        product.flipkart_url ||
+        product.flipkart_link ||
+        "#";
 
-    let badgeHTML = "";
-
-    if (cheaperPlatform === "Amazon") {
-
-        badgeHTML = `
-            <div class="cheaper-badge amazon-badge">
-                🏆 Amazon is cheaper
-            </div>
-        `;
-
-    } else if (cheaperPlatform === "Flipkart") {
-
-        badgeHTML = `
-            <div class="cheaper-badge flipkart-badge">
-                🏆 Flipkart is cheaper
-            </div>
-        `;
-
-    } else {
-
-        badgeHTML = `
-            <div class="cheaper-badge same-badge">
-                Same Price
-            </div>
-        `;
-    }
-
-
-    // --------------------------------------------------------
-    // Product Card HTML
-    // --------------------------------------------------------
 
     card.innerHTML = `
 
-        ${badgeHTML}
-
         <div class="product-image-container">
-            ${imageHTML}
+
+            ${
+                imageUrl
+                ?
+                `
+                <img
+                    src="${escapeHTML(imageUrl)}"
+                    alt="${escapeHTML(productName)}"
+                    loading="lazy"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                >
+
+                <div
+                    class="image-fallback"
+                    style="
+                        display:none;
+                        align-items:center;
+                        justify-content:center;
+                        width:100%;
+                        height:100%;
+                        font-size:45px;
+                    "
+                >
+                    ${getCategoryIcon(category)}
+                </div>
+                `
+                :
+                `
+                <div
+                    class="image-fallback"
+                    style="
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        width:100%;
+                        height:100%;
+                        font-size:45px;
+                    "
+                >
+                    ${getCategoryIcon(category)}
+                </div>
+                `
+            }
+
         </div>
 
-        <div class="product-content">
 
-            <h3 class="product-name">
-                ${escapeHTML(product.amazon_product || "Product")}
+        <div class="product-info">
+
+            <h3>
+                ${escapeHTML(productName)}
             </h3>
 
-            <p class="category">
-                Category: ${escapeHTML(product.category || "Other")}
-            </p>
+
+            <span class="product-category">
+                ${escapeHTML(category)}
+            </span>
 
 
-            <div class="comparison">
+            <div class="store-comparison">
 
 
-                <!-- AMAZON -->
+                <div class="store-block">
 
-                <div class="store amazon-store">
+                    <span>
+                        Amazon
+                    </span>
 
-                    <div class="store-name">
-                        🟠 Amazon
-                    </div>
-
-                    <div class="price">
-                        ₹${formatPrice(amazonPrice)}
-                    </div>
-
-                    ${amazonLink}
-
-                </div>
-
-
-                <!-- FLIPKART -->
-
-                <div class="store flipkart-store">
-
-                    <div class="store-name">
-                        🔵 Flipkart
-                    </div>
-
-                    <div class="price">
-                        ₹${formatPrice(flipkartPrice)}
-                    </div>
-
-                    ${flipkartLink}
-
-                </div>
-
-
-            </div>
-
-
-            <div class="product-footer">
-
-                <span>
-                    💰 Savings:
-                    <strong>₹${formatPrice(savings)}</strong>
-                </span>
-
-                <span>
-                    Similarity:
                     <strong>
-                        ${formatSimilarity(product.similarity_score)}
+                        ${
+                            amazonPrice > 0
+                            ? formatPrice(amazonPrice)
+                            : "Not available"
+                        }
                     </strong>
-                </span>
+
+                </div>
+
+
+                <div class="store-block">
+
+                    <span>
+                        Flipkart
+                    </span>
+
+                    <strong>
+                        ${
+                            flipkartPrice > 0
+                            ? formatPrice(flipkartPrice)
+                            : "Not available"
+                        }
+                    </strong>
+
+                </div>
+
 
             </div>
+
+
+            ${
+                savings > 0
+                ?
+                `
+                <div class="savings">
+
+                    💰 Save ${formatPrice(savings)}
+                    with ${cheaperPlatform}
+
+                </div>
+                `
+                :
+                `
+                <div class="savings">
+
+                    Compare prices before buying
+
+                </div>
+                `
+            }
+
+
+            <div
+                class="product-links"
+                style="
+                    display:grid;
+                    grid-template-columns:1fr 1fr;
+                    gap:8px;
+                "
+            >
+
+                <a
+                    href="${safeLink(amazonLink)}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="compare-button"
+                >
+                    Amazon
+                </a>
+
+
+                <a
+                    href="${safeLink(flipkartLink)}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="compare-button"
+                >
+                    Flipkart
+                </a>
+
+            </div>
+
 
         </div>
+
     `;
 
 
     return card;
+
 }
 
 
 // ============================================================
-// Format Price
+// SEARCH PRODUCTS
 // ============================================================
 
-function formatPrice(price) {
+async function searchProducts() {
 
-    return Number(price).toLocaleString("en-IN", {
-        maximumFractionDigits: 0
-    });
-}
+    const searchInput =
+        document.getElementById("searchInput");
 
-
-// ============================================================
-// Format Similarity
-// ============================================================
-
-function formatSimilarity(score) {
-
-    const value = Number(score);
-
-    if (isNaN(value)) {
-        return "N/A";
+    if (!searchInput) {
+        return;
     }
 
-    return (value * 100).toFixed(1) + "%";
+
+    const query =
+        searchInput.value.trim();
+
+
+    if (!query) {
+
+        loadProducts();
+
+        return;
+
+    }
+
+
+    showLoading();
+
+
+    try {
+
+        const response =
+            await fetch(
+                `/api/search?q=${encodeURIComponent(query)}`
+            );
+
+
+        if (!response.ok) {
+            throw new Error("Search failed");
+        }
+
+
+        const data =
+            await response.json();
+
+
+        displayProducts(
+            data.products || []
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        showError(
+            "Unable to search products."
+        );
+
+    }
+
 }
 
 
 // ============================================================
-// Update Result Count
+// CATEGORY FILTER
 // ============================================================
 
-function updateResultCount(count) {
+async function loadCategory(category) {
 
-    const element =
+    if (category === "all") {
+
+        loadProducts();
+
+        return;
+
+    }
+
+
+    showLoading();
+
+
+    try {
+
+        const response =
+            await fetch(
+                `/api/category/${encodeURIComponent(category)}`
+            );
+
+
+        if (!response.ok) {
+            throw new Error("Category loading failed");
+        }
+
+
+        const data =
+            await response.json();
+
+
+        displayProducts(
+            data.products || []
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        showError(
+            "Unable to load this category."
+        );
+
+    }
+
+}
+
+
+// ============================================================
+// SELECT CATEGORY
+// ============================================================
+
+function selectCategory(button, category) {
+
+    setActiveCategory(category);
+
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+
+    if (searchInput) {
+
+        searchInput.value = "";
+
+    }
+
+
+    if (category === "all") {
+
+        loadProducts();
+
+    }
+
+    else {
+
+        loadCategory(category);
+
+    }
+
+
+    // Scroll to products
+
+    const productsSection =
+        document.querySelector(".products-section");
+
+
+    if (productsSection) {
+
+        setTimeout(function () {
+
+            productsSection.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }, 100);
+
+    }
+
+}
+
+
+// ============================================================
+// ACTIVE CATEGORY
+// ============================================================
+
+function setActiveCategory(category) {
+
+    const buttons =
+        document.querySelectorAll(
+            ".category-card"
+        );
+
+
+    buttons.forEach(function (button) {
+
+        button.classList.remove("active");
+
+
+        const text =
+            button.textContent
+                .toLowerCase()
+                .trim();
+
+
+        if (
+            category === "all" &&
+            (
+                text.includes("all products") ||
+                text.includes("all categories")
+            )
+        ) {
+
+            button.classList.add("active");
+
+        }
+
+
+        else if (
+            category === "Mobiles" &&
+            text.includes("mobiles")
+        ) {
+
+            button.classList.add("active");
+
+        }
+
+
+        else if (
+            category === "Laptops" &&
+            text.includes("laptops")
+        ) {
+
+            button.classList.add("active");
+
+        }
+
+
+        else if (
+            category === "Earphones" &&
+            text.includes("earphones")
+        ) {
+
+            button.classList.add("active");
+
+        }
+
+    });
+
+}
+
+
+// ============================================================
+// CLEAR SEARCH
+// ============================================================
+
+function clearSearch() {
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+
+    if (searchInput) {
+
+        searchInput.value = "";
+
+    }
+
+
+    setActiveCategory("all");
+
+    loadProducts();
+
+}
+
+
+// ============================================================
+// RESULT TEXT
+// ============================================================
+
+// IMPORTANT:
+// This function does NOT display the number of products.
+
+function updateResultCount() {
+
+    const resultCount =
         document.getElementById("resultCount");
 
-    element.textContent =
-        `${count} product${count === 1 ? "" : "s"} found`;
+
+    if (!resultCount) {
+        return;
+    }
+
+
+    resultCount.textContent =
+        "Compare prices and find the right product.";
+
 }
 
 
 // ============================================================
-// Loading Message
+// LOADING
 // ============================================================
 
 function showLoading() {
 
     const container =
-        document.getElementById("productsContainer");
+        document.getElementById(
+            "productsContainer"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
 
     container.innerHTML = `
+
         <div class="loading">
-            <div class="spinner"></div>
-            <p>Loading products...</p>
+
+            <div
+                style="
+                    font-size:30px;
+                    margin-bottom:10px;
+                "
+            >
+                ⏳
+            </div>
+
+            Loading products...
+
         </div>
+
     `;
+
 }
 
 
 // ============================================================
-// Error Message
+// ERROR
 // ============================================================
 
 function showError(message) {
 
     const container =
-        document.getElementById("productsContainer");
+        document.getElementById(
+            "productsContainer"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
 
     container.innerHTML = `
+
         <div class="error-message">
-            <h3>⚠️ Error</h3>
-            <p>${escapeHTML(message)}</p>
+
+            <div
+                style="
+                    font-size:30px;
+                    margin-bottom:10px;
+                "
+            >
+                ⚠️
+            </div>
+
+            <p>
+                ${escapeHTML(message)}
+            </p>
+
+            <button
+                onclick="loadProducts()"
+                style="
+                    margin-top:15px;
+                    padding:10px 18px;
+                    border:none;
+                    border-radius:8px;
+                    background:#159b91;
+                    color:white;
+                    cursor:pointer;
+                "
+            >
+                Try Again
+            </button>
+
         </div>
+
     `;
+
+
+    updateResultCount();
+
 }
 
 
 // ============================================================
-// Escape HTML
+// PRICE FORMAT
+// ============================================================
+
+function formatPrice(price) {
+
+    const number =
+        Number(price);
+
+
+    if (
+        !Number.isFinite(number) ||
+        number <= 0
+    ) {
+
+        return "₹--";
+
+    }
+
+
+    return "₹" +
+        number.toLocaleString("en-IN");
+
+}
+
+
+// ============================================================
+// CATEGORY ICON
+// ============================================================
+
+function getCategoryIcon(category) {
+
+    const value =
+        String(category)
+            .toLowerCase();
+
+
+    if (value.includes("mobile")) {
+
+        return "📱";
+
+    }
+
+
+    if (value.includes("laptop")) {
+
+        return "💻";
+
+    }
+
+
+    if (
+        value.includes("earphone") ||
+        value.includes("audio")
+    ) {
+
+        return "🎧";
+
+    }
+
+
+    return "🛍️";
+
+}
+
+
+// ============================================================
+// ESCAPE HTML
 // ============================================================
 
 function escapeHTML(value) {
 
     if (value === null || value === undefined) {
+
         return "";
+
     }
+
 
     return String(value)
         .replace(/&/g, "&amp;")
@@ -542,4 +839,37 @@ function escapeHTML(value) {
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+
+}
+
+
+// ============================================================
+// SAFE LINK
+// ============================================================
+
+function safeLink(url) {
+
+    if (!url) {
+
+        return "#";
+
+    }
+
+
+    const value =
+        String(url).trim();
+
+
+    if (
+        value.startsWith("http://") ||
+        value.startsWith("https://")
+    ) {
+
+        return escapeHTML(value);
+
+    }
+
+
+    return "#";
+
 }

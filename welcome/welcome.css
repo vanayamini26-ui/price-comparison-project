@@ -1,0 +1,501 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f7f9fc;
+    color: #172033;
+}
+
+
+/* ============================================================
+   MAIN PAGE
+   ============================================================ */
+
+.welcome-page {
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ============================================================
+   LOGO
+   ============================================================ */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 28px 7%;
+}
+
+.logo-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.20);
+}
+
+.logo-text h1 {
+    font-size: 25px;
+    letter-spacing: -0.5px;
+}
+
+.logo-text h1 span {
+    color: #2563eb;
+}
+
+.logo-text p {
+    margin-top: 3px;
+    font-size: 11px;
+    color: #7b8494;
+    letter-spacing: 0.8px;
+}
+
+
+/* ============================================================
+   WELCOME CONTENT
+   ============================================================ */
+
+.welcome-content {
+    width: 86%;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 70px;
+    flex: 1;
+    padding: 35px 0 50px;
+}
+
+
+/* ============================================================
+   TEXT
+   ============================================================ */
+
+.welcome-text {
+    max-width: 570px;
+}
+
+.small-title {
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+}
+
+.welcome-text h2 {
+    font-size: clamp(45px, 6vw, 76px);
+    line-height: 1.02;
+    letter-spacing: -3px;
+    color: #172033;
+}
+
+.welcome-text h2 span {
+    color: #2563eb;
+}
+
+.description {
+    max-width: 510px;
+    margin-top: 25px;
+    color: #687386;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.get-started {
+    margin-top: 32px;
+    border: none;
+    border-radius: 12px;
+    padding: 16px 25px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+    transition: 0.25s ease;
+}
+
+.get-started span {
+    margin-left: 12px;
+    font-size: 20px;
+}
+
+.get-started:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+
+/* ============================================================
+   SHOPPING ILLUSTRATION
+   ============================================================ */
+
+.shopping-illustration {
+    width: 440px;
+    height: 430px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.circle-one {
+    width: 360px;
+    height: 360px;
+    background: #e8f0ff;
+    left: 40px;
+    top: 25px;
+}
+
+.circle-two {
+    width: 250px;
+    height: 250px;
+    background: #dce9ff;
+    left: 95px;
+    top: 80px;
+}
+
+
+/* Phone */
+
+.phone-card {
+    position: absolute;
+    width: 205px;
+    height: 350px;
+    background: #172033;
+    border-radius: 30px;
+    left: 120px;
+    top: 42px;
+    padding: 9px;
+    transform: rotate(-7deg);
+    box-shadow: 0 25px 45px rgba(25, 40, 70, 0.25);
+}
+
+.phone-screen {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 23px;
+    padding: 20px 13px;
+}
+
+.mini-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: bold;
+    color: #172033;
+}
+
+.mini-header span:first-child {
+    color: #2563eb;
+}
+
+.mini-search {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    background: #f1f4f8;
+    color: #9aa3b2;
+    font-size: 9px;
+}
+
+.mini-products {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mini-product {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px;
+    background: #f7f9fc;
+    border-radius: 10px;
+}
+
+.mini-product span {
+    font-size: 22px;
+}
+
+.mini-product div {
+    width: 65px;
+    height: 8px;
+    background: #dce2ea;
+    border-radius: 5px;
+}
+
+
+/* ============================================================
+   FLOATING PRICE CARDS
+   ============================================================ */
+
+.floating-price {
+    position: absolute;
+    background: white;
+    padding: 13px 17px;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(31, 45, 70, 0.14);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.floating-price span {
+    font-size: 10px;
+    color: #7b8494;
+}
+
+.floating-price strong {
+    font-size: 17px;
+    color: #172033;
+}
+
+.price-one {
+    top: 75px;
+    right: 0;
+}
+
+.price-two {
+    bottom: 82px;
+    left: 0;
+}
+
+.saving-badge {
+    position: absolute;
+    right: 5px;
+    bottom: 25px;
+    background: #dcfce7;
+    color: #15803d;
+    padding: 11px 15px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* ============================================================
+   FEATURES
+   ============================================================ */
+
+.features {
+    width: 86%;
+    max-width: 1200px;
+    margin: 0 auto 35px;
+    padding: 20px 25px;
+    border-radius: 18px;
+    background: white;
+    box-shadow: 0 8px 30px rgba(30, 50, 80, 0.06);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.feature-icon {
+    width: 43px;
+    height: 43px;
+    border-radius: 12px;
+    background: #eff6ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.feature strong {
+    display: block;
+    font-size: 14px;
+}
+
+.feature p {
+    margin-top: 4px;
+    font-size: 11px;
+    color: #8992a1;
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+footer {
+    text-align: center;
+    padding: 18px;
+    color: #9aa3b2;
+    font-size: 11px;
+}
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+    .welcome-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+        padding-top: 20px;
+    }
+
+    .welcome-text {
+        max-width: 650px;
+    }
+
+    .description {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .shopping-illustration {
+        transform: scale(0.82);
+        margin-top: -35px;
+        margin-bottom: -55px;
+    }
+
+    .features {
+        width: 90%;
+    }
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    .logo {
+        padding: 20px 22px;
+    }
+
+    .logo-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 21px;
+    }
+
+    .logo-text h1 {
+        font-size: 22px;
+    }
+
+    .logo-text p {
+        font-size: 9px;
+    }
+
+
+    .welcome-content {
+        width: 90%;
+        padding: 10px 0 20px;
+        gap: 5px;
+    }
+
+
+    .small-title {
+        font-size: 10px;
+        letter-spacing: 1.5px;
+        margin-bottom: 14px;
+    }
+
+
+    .welcome-text h2 {
+        font-size: 42px;
+        letter-spacing: -2px;
+    }
+
+
+    .description {
+        margin-top: 18px;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+
+    .get-started {
+        width: 100%;
+        margin-top: 24px;
+        padding: 15px;
+    }
+
+
+    .shopping-illustration {
+        width: 330px;
+        height: 315px;
+        transform: scale(0.78);
+        margin-top: -30px;
+        margin-bottom: -55px;
+    }
+
+
+    .features {
+        width: 90%;
+        grid-template-columns: 1fr;
+        padding: 17px;
+        gap: 14px;
+        margin-bottom: 20px;
+    }
+
+
+    .feature {
+        padding: 4px;
+    }
+
+
+    footer {
+        padding: 15px;
+        font-size: 10px;
+    }
+}
+
+
+/* ============================================================
+   VERY SMALL PHONES
+   ============================================================ */
+
+@media (max-width: 380px) {
+
+    .welcome-text h2 {
+        font-size: 37px;
+    }
+
+    .description {
+        font-size: 13px;
+    }
+
+    .shopping-illustration {
+        transform: scale(0.68);
+        margin-top: -45px;
+        margin-bottom: -80px;
+    }
+
+}

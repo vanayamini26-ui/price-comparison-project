@@ -1,0 +1,429 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fb;
+    color: #172033;
+}
+
+.login-page {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 45% 55%;
+}
+
+
+/* ================================
+   BRAND SECTION
+================================ */
+
+.brand-section {
+    background: linear-gradient(
+        145deg,
+        #172033,
+        #1e3a68
+    );
+
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+}
+
+.brand-content {
+    width: 100%;
+    max-width: 470px;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.brand-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+
+    background: #2563eb;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 25px;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.20);
+}
+
+.brand-logo h1 {
+    font-size: 27px;
+}
+
+.brand-logo h1 span {
+    color: #60a5fa;
+}
+
+.brand-logo p {
+    margin-top: 4px;
+    color: #b7c2d6;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.brand-message {
+    margin-top: 100px;
+}
+
+.brand-small {
+    color: #60a5fa;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 17px;
+}
+
+.brand-message h2 {
+    font-size: 52px;
+    line-height: 1.05;
+    letter-spacing: -2px;
+}
+
+.brand-message h2 span {
+    color: #60a5fa;
+}
+
+.brand-message > p:last-child {
+    margin-top: 25px;
+    color: #c3ccdb;
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 420px;
+}
+
+.brand-points {
+    margin-top: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.brand-points div {
+    color: #d7deea;
+    font-size: 14px;
+}
+
+.brand-points span {
+    display: inline-flex;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #2563eb;
+    align-items: center;
+    justify-content: center;
+    margin-right: 9px;
+    font-size: 12px;
+}
+
+
+/* ================================
+   ACCOUNT SECTION
+================================ */
+
+.account-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.account-card {
+    width: 100%;
+    max-width: 450px;
+}
+
+.form-box {
+    background: white;
+    border-radius: 20px;
+    padding: 42px;
+    box-shadow:
+        0 20px 60px rgba(30, 50, 80, 0.10);
+}
+
+.hidden {
+    display: none;
+}
+
+
+/* ================================
+   FORM HEADING
+================================ */
+
+.form-heading {
+    margin-bottom: 30px;
+}
+
+.form-label {
+    color: #2563eb;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1.7px;
+    margin-bottom: 9px;
+}
+
+.form-heading h2 {
+    font-size: 29px;
+    letter-spacing: -0.8px;
+}
+
+.form-heading p:last-child {
+    color: #7b8494;
+    font-size: 13px;
+    margin-top: 8px;
+    line-height: 1.5;
+}
+
+
+/* ================================
+   INPUTS
+================================ */
+
+.input-group {
+    margin-bottom: 19px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 7px;
+    color: #374151;
+}
+
+.input-group input {
+    width: 100%;
+    height: 48px;
+    border: 1px solid #dce1e8;
+    border-radius: 10px;
+    padding: 0 14px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s;
+    background: #fbfcfe;
+}
+
+.input-group input:focus {
+    border-color: #2563eb;
+    background: white;
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.08);
+}
+
+.input-group input::placeholder {
+    color: #a1a9b6;
+}
+
+
+/* ================================
+   BUTTON
+================================ */
+
+.primary-button {
+    width: 100%;
+    height: 50px;
+    margin-top: 7px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #2563eb;
+    color: white;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+
+    box-shadow:
+        0 9px 20px rgba(37, 99, 235, 0.20);
+}
+
+.primary-button span {
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+.primary-button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+
+/* ================================
+   SWITCH
+================================ */
+
+.switch-text {
+    margin-top: 25px;
+    text-align: center;
+    color: #7b8494;
+    font-size: 13px;
+}
+
+.switch-text button {
+    border: none;
+    background: none;
+    color: #2563eb;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 13px;
+    margin-left: 3px;
+}
+
+.switch-text button:hover {
+    text-decoration: underline;
+}
+
+
+/* ================================
+   MESSAGE
+================================ */
+
+.message {
+    min-height: 20px;
+    margin-top: 13px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* ================================
+   SECURITY
+================================ */
+
+.security-note {
+    text-align: center;
+    margin-top: 18px;
+    color: #9aa3b2;
+    font-size: 10px;
+}
+
+
+/* ================================
+   TABLET
+================================ */
+
+@media (max-width: 900px) {
+
+    .login-page {
+        grid-template-columns: 1fr;
+    }
+
+    .brand-section {
+        min-height: 330px;
+        padding: 35px;
+    }
+
+    .brand-message {
+        margin-top: 45px;
+    }
+
+    .brand-message h2 {
+        font-size: 42px;
+    }
+
+    .brand-message > p:last-child {
+        display: none;
+    }
+
+    .brand-points {
+        margin-top: 25px;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .brand-points div {
+        font-size: 12px;
+    }
+
+    .account-section {
+        padding: 35px 20px;
+    }
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 600px) {
+
+    .brand-section {
+        min-height: 245px;
+        padding: 25px 22px;
+    }
+
+    .brand-icon {
+        width: 43px;
+        height: 43px;
+        font-size: 21px;
+    }
+
+    .brand-logo h1 {
+        font-size: 23px;
+    }
+
+    .brand-logo p {
+        font-size: 9px;
+    }
+
+    .brand-message {
+        margin-top: 30px;
+    }
+
+    .brand-small {
+        font-size: 9px;
+        margin-bottom: 10px;
+    }
+
+    .brand-message h2 {
+        font-size: 34px;
+        letter-spacing: -1px;
+    }
+
+    .brand-points {
+        display: none;
+    }
+
+    .account-section {
+        padding: 25px 18px;
+        align-items: flex-start;
+    }
+
+    .form-box {
+        padding: 28px 22px;
+        border-radius: 17px;
+    }
+
+    .form-heading h2 {
+        font-size: 25px;
+    }
+
+    .form-heading {
+        margin-bottom: 25px;
+    }
+
+    .input-group input {
+        height: 47px;
+    }
+}

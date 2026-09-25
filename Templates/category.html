@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>PriceWise - Products</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/category.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header class="category-header">
+
+    <div class="header-inner">
+
+        <a
+            href="/products"
+            class="brand"
+        >
+
+            <div class="brand-icon">
+                🛍️
+            </div>
+
+            <div>
+
+                <h1>
+                    Price<span>Wise</span>
+                </h1>
+
+                <p>
+                    The Wise Way to Shop
+                </p>
+
+            </div>
+
+        </a>
+
+
+        <a
+            href="/products"
+            class="back-button"
+        >
+            ← Back
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- CATEGORY HERO -->
+
+<section class="category-hero">
+
+    <div class="hero-inner">
+
+        <a
+            href="/products"
+            class="back-link"
+        >
+            ← Back to Categories
+        </a>
+
+
+        <p class="small-label">
+            PRICE COMPARISON
+        </p>
+
+
+        <h2 id="categoryTitle">
+            Products
+        </h2>
+
+
+        <p id="categoryDescription">
+            Compare prices and find the right product.
+        </p>
+
+
+        <!-- SEARCH -->
+
+        <div class="category-search">
+
+            <span>
+                🔍
+            </span>
+
+            <input
+                type="text"
+                id="categorySearch"
+                placeholder="Search products..."
+            >
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- PRODUCTS -->
+
+<main class="products-area">
+
+
+    <div
+        id="productsContainer"
+        class="products-grid"
+    >
+
+        <div class="loading">
+            Loading products...
+        </div>
+
+    </div>
+
+
+</main>
+
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+    <div>
+
+        <strong>
+            Price<span>Wise</span>
+        </strong>
+
+        <p>
+            Compare prices. Save money. Shop wise.
+        </p>
+
+    </div>
+
+
+    <a href="/products">
+        Back to PriceWise
+    </a>
+
+</footer>
+
+
+
+<script>
+
+    const selectedCategory =
+        "{{ category }}";
+
+</script>
+
+
+<script src="/static/category.js"></script>
+
+</body>
+
+</html>

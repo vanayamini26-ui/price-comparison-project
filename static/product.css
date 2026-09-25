@@ -1,0 +1,516 @@
+/* ============================================================
+   PRICEWISE - PRODUCT COMPARISON PAGE
+============================================================ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f6f8fb;
+    color: #1f2937;
+}
+
+
+/* ============================================================
+   HEADER
+============================================================ */
+
+.product-header {
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.header-inner {
+    max-width: 1200px;
+    margin: auto;
+    padding: 18px 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    text-decoration: none;
+    color: #111827;
+}
+
+.brand-icon {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eef2ff;
+    border-radius: 12px;
+
+    font-size: 23px;
+}
+
+.brand h1 {
+    font-size: 25px;
+    margin-bottom: 2px;
+}
+
+.brand h1 span {
+    color: #6366f1;
+}
+
+.brand p {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.back-button {
+    text-decoration: none;
+
+    padding: 10px 18px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+
+    color: #374151;
+    background: white;
+
+    font-size: 14px;
+}
+
+.back-button:hover {
+    background: #f3f4f6;
+}
+
+
+/* ============================================================
+   MAIN
+============================================================ */
+
+.comparison-page {
+    max-width: 1100px;
+    margin: auto;
+    padding: 35px 20px 60px;
+}
+
+.back-link {
+    display: inline-block;
+
+    margin-bottom: 25px;
+
+    text-decoration: none;
+
+    color: #6366f1;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+
+/* ============================================================
+   PRODUCT CONTAINER
+============================================================ */
+
+.product-container {
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 35px;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+}
+
+
+/* ============================================================
+   PRODUCT DETAILS
+============================================================ */
+
+.product-details {
+    display: grid;
+
+    grid-template-columns: 1fr 1.2fr;
+
+    gap: 45px;
+
+    align-items: center;
+}
+
+
+/* ============================================================
+   PRODUCT IMAGE
+============================================================ */
+
+.product-image-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 380px;
+
+    background: #f8fafc;
+
+    border-radius: 15px;
+
+    padding: 25px;
+}
+
+.product-image {
+    max-width: 100%;
+    max-height: 350px;
+
+    object-fit: contain;
+
+    border-radius: 10px;
+}
+
+
+/* ============================================================
+   PRODUCT INFORMATION
+============================================================ */
+
+.product-info {
+    padding: 10px;
+}
+
+.product-category {
+    display: inline-block;
+
+    padding: 6px 12px;
+
+    background: #eef2ff;
+    color: #6366f1;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    margin-bottom: 15px;
+}
+
+.product-title {
+    font-size: 28px;
+
+    line-height: 1.3;
+
+    color: #111827;
+
+    margin-bottom: 25px;
+}
+
+
+/* ============================================================
+   PRICE COMPARISON
+============================================================ */
+
+.price-comparison {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.price-card {
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    padding: 18px;
+
+    background: #ffffff;
+}
+
+.store-name {
+    font-size: 14px;
+
+    color: #6b7280;
+
+    margin-bottom: 8px;
+}
+
+.store-price {
+    font-size: 25px;
+
+    font-weight: 700;
+
+    color: #111827;
+}
+
+.price-card.cheaper {
+    border: 2px solid #22c55e;
+
+    background: #f0fdf4;
+}
+
+.cheaper-label {
+    display: inline-block;
+
+    margin-top: 8px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    color: #15803d;
+}
+
+
+/* ============================================================
+   SAVINGS
+============================================================ */
+
+.savings-box {
+    padding: 15px;
+
+    margin-bottom: 25px;
+
+    border-radius: 10px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e5e7eb;
+
+    font-size: 15px;
+}
+
+.savings-amount {
+    font-weight: bold;
+
+    color: #16a34a;
+}
+
+
+/* ============================================================
+   SHOP BUTTONS
+============================================================ */
+
+.shop-buttons {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+}
+
+.shop-button {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 14px 18px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+.amazon-button {
+    background: #111827;
+    color: white;
+}
+
+.amazon-button:hover {
+    background: #374151;
+    transform: translateY(-2px);
+}
+
+.flipkart-button {
+    background: #2874f0;
+    color: white;
+}
+
+.flipkart-button:hover {
+    background: #1258c7;
+    transform: translateY(-2px);
+}
+
+
+/* ============================================================
+   LOADING
+============================================================ */
+
+.loading {
+    text-align: center;
+
+    padding: 80px 20px;
+
+    color: #6b7280;
+
+    font-size: 16px;
+}
+
+.loading-icon {
+    font-size: 35px;
+
+    margin-bottom: 15px;
+}
+
+
+/* ============================================================
+   ERROR
+============================================================ */
+
+.error-message {
+    text-align: center;
+
+    padding: 70px 20px;
+}
+
+.error-message h2 {
+    color: #dc2626;
+
+    margin-bottom: 10px;
+}
+
+.error-message p {
+    color: #6b7280;
+
+    margin-bottom: 20px;
+}
+
+.error-back {
+    display: inline-block;
+
+    padding: 11px 20px;
+
+    background: #6366f1;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+}
+
+
+/* ============================================================
+   FOOTER
+============================================================ */
+
+.footer {
+    background: #111827;
+
+    color: white;
+
+    padding: 25px 30px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+.footer strong {
+    font-size: 18px;
+}
+
+.footer strong span {
+    color: #818cf8;
+}
+
+.footer p {
+    color: #9ca3af;
+
+    font-size: 13px;
+
+    margin-top: 5px;
+}
+
+.footer a {
+    color: #c7d2fe;
+
+    text-decoration: none;
+
+    font-size: 14px;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 800px) {
+
+    .product-details {
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+    }
+
+    .product-image-section {
+        min-height: 300px;
+    }
+
+    .product-title {
+        font-size: 24px;
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .comparison-page {
+        padding: 20px 12px 40px;
+    }
+
+    .product-container {
+        padding: 20px;
+    }
+
+    .header-inner {
+        padding: 14px;
+    }
+
+    .brand h1 {
+        font-size: 21px;
+    }
+
+    .back-button {
+        padding: 8px 12px;
+    }
+
+    .price-comparison {
+        grid-template-columns: 1fr;
+    }
+
+    .shop-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .product-image-section {
+        min-height: 250px;
+    }
+
+    .footer {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+}

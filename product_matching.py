@@ -13,7 +13,7 @@ FLIPKART_FILE = "processed_data/flipkart_final.csv"
 
 OUTPUT_FILE = "processed_data/final_product_matches.csv"
 
-SIMILARITY_THRESHOLD = 0.30
+SIMILARITY_THRESHOLD = 0.20
 
 
 # ============================================================

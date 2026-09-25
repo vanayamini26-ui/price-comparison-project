@@ -1,192 +1,603 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Smart Price Comparison</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
+    <title>PriceWise - Compare & Save</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
 </head>
+
 
 <body>
 
-    <!-- =====================================================
-         HEADER
-    ====================================================== -->
 
-    <header class="header">
+<!-- ============================================================
+     HEADER
+============================================================ -->
 
-        <div class="logo">
-            🛒 Smart Price Comparison
-        </div>
+<header class="main-header">
 
-        <p>
-            Compare Amazon & Flipkart prices in one place
-        </p>
-
-    </header>
+    <div class="header-inner">
 
 
-    <!-- =====================================================
-         MAIN CONTAINER
-    ====================================================== -->
+        <a
+            href="/products"
+            class="brand"
+        >
 
-    <main class="container">
+            <div class="brand-icon">
+                🛍️
+            </div>
 
-        <!-- Search Section -->
+            <div>
 
-        <section class="search-section">
+                <h1>
+                    Price<span>Wise</span>
+                </h1>
 
-            <h1>Find the Best Price</h1>
-
-            <div class="search-box">
-
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search for a product..."
-                >
-
-                <button onclick="searchProducts()">
-                    🔍 Search
-                </button>
+                <p>
+                    The Wise Way to Shop
+                </p>
 
             </div>
 
-            <!-- Category Filter -->
-
-            <div class="categories">
-
-                <button onclick="loadProducts()">
-                    All
-                </button>
-
-                <button onclick="loadCategory('Mobiles')">
-                    📱 Mobiles
-                </button>
-
-                <button onclick="loadCategory('Laptops')">
-                    💻 Laptops
-                </button>
-
-                <button onclick="loadCategory('Earphones')">
-                    🎧 Earphones
-                </button>
-
-            </div>
-
-        </section>
+        </a>
 
 
-        <!-- =================================================
-             STATISTICS
-        ================================================== -->
+        <nav class="desktop-nav">
 
-        <section class="stats">
+            <a
+                href="/products"
+                class="active"
+            >
+                Products
+            </a>
 
-            <div class="stat-card">
+            <a href="#">
+                Deals
+            </a>
 
-                <h3 id="totalProducts">
-                    0
-                </h3>
+            <a href="#">
+                About
+            </a>
 
-                <p>Total Products</p>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <h3 id="amazonCheaper">
-                    0
-                </h3>
-
-                <p>Amazon Cheaper</p>
-
-            </div>
+        </nav>
 
 
-            <div class="stat-card">
+    </div>
 
-                <h3 id="flipkartCheaper">
-                    0
-                </h3>
-
-                <p>Flipkart Cheaper</p>
-
-            </div>
+</header>
 
 
-            <div class="stat-card">
 
-                <h3 id="samePrice">
-                    0
-                </h3>
+<!-- ============================================================
+     HERO
+============================================================ -->
 
-                <p>Same Price</p>
+<section class="hero-section">
 
-            </div>
-
-        </section>
+    <div class="hero-content">
 
 
-        <!-- =================================================
-             PRODUCTS
-        ================================================== -->
+        <div class="hero-text">
 
-        <section>
+            <p class="hero-small">
+                SMART SHOPPING MADE SIMPLE
+            </p>
 
-            <div class="section-title">
 
-                <h2>Price Comparisons</h2>
+            <h2>
 
-                <span id="resultCount">
-                    Loading...
+                Find the right product
+
+                <span>
+                    at the right price.
                 </span>
 
+            </h2>
+
+
+            <p>
+
+                Search electronic products and compare
+                prices from trusted online stores.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- SEARCH -->
+
+        <form
+            class="main-search"
+            onsubmit="goToSearch(); return false;"
+        >
+
+            <span class="search-icon">
+                🔍
+            </span>
+
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search for products (e.g. iPhone, Laptop...)"
+                autocomplete="off"
+            >
+
+
+            <button type="submit">
+                Search
+            </button>
+
+
+            <button
+                type="button"
+                class="clear-search"
+                onclick="clearSearch()"
+                title="Clear search"
+            >
+                ×
+            </button>
+
+        </form>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ============================================================
+     BENEFITS
+============================================================ -->
+
+<section class="benefits-section">
+
+
+    <div class="benefit">
+
+        <div class="benefit-icon">
+            🏷️
+        </div>
+
+        <div>
+
+            <strong>
+                Compare Prices
+            </strong>
+
+            <p>
+                Across trusted stores
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="benefit">
+
+        <div class="benefit-icon">
+            💚
+        </div>
+
+        <div>
+
+            <strong>
+                Find Best Deals
+            </strong>
+
+            <p>
+                Save more, always
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="benefit">
+
+        <div class="benefit-icon">
+            🛒
+        </div>
+
+        <div>
+
+            <strong>
+                Trusted Stores
+            </strong>
+
+            <p>
+                Shop with confidence
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="benefit">
+
+        <div class="benefit-icon">
+            ⚡
+        </div>
+
+        <div>
+
+            <strong>
+                Smart Choices
+            </strong>
+
+            <p>
+                Make informed decisions
+            </p>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ============================================================
+     SHOP BY CATEGORY
+============================================================ -->
+
+<section class="category-section">
+
+
+    <div class="section-heading">
+
+        <div>
+
+            <h2>
+                Shop by Category
+            </h2>
+
+            <p>
+                Find the best prices on your favorite electronics
+            </p>
+
+        </div>
+
+
+        <button
+            class="view-all"
+            onclick="openCategory('All')"
+        >
+            View All Categories →
+        </button>
+
+    </div>
+
+
+
+    <div class="category-grid">
+
+
+        <!-- ALL PRODUCTS -->
+
+        <button
+            class="category-card active"
+            onclick="openCategory('All')"
+        >
+
+            <div class="category-icon mobile-icon">
+                🛍️
             </div>
 
+            <strong>
+                All Products
+            </strong>
 
-            <div id="productsContainer"
-                 class="products-container">
+        </button>
 
-                <div class="loading">
-                    Loading products...
-                </div>
 
+
+        <!-- MOBILES -->
+
+        <button
+            class="category-card"
+            onclick="openCategory('Mobiles')"
+        >
+
+            <div class="category-icon mobile-icon">
+                📱
             </div>
 
-        </section>
+            <strong>
+                Mobiles
+            </strong>
 
-    </main>
+        </button>
 
 
-    <!-- =====================================================
-         FOOTER
-    ====================================================== -->
 
-    <footer>
+        <!-- LAPTOPS -->
+
+        <button
+            class="category-card"
+            onclick="openCategory('Laptops')"
+        >
+
+            <div class="category-icon laptop-icon">
+                💻
+            </div>
+
+            <strong>
+                Laptops
+            </strong>
+
+        </button>
+
+
+
+        <!-- EARPHONES -->
+
+        <button
+            class="category-card"
+            onclick="openCategory('Earphones')"
+        >
+
+            <div class="category-icon audio-icon">
+                🎧
+            </div>
+
+            <strong>
+                Earphones
+            </strong>
+
+        </button>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ============================================================
+     HOW PRICEWISE WORKS
+============================================================ -->
+
+<section class="how-section">
+
+
+    <div class="how-heading">
+
+        <h2>
+            How PriceWise Works?
+        </h2>
 
         <p>
-            Smart Price Comparison System
+            Get the best deals in just a few clicks.
         </p>
+
+    </div>
+
+
+
+    <div class="steps">
+
+
+        <!-- STEP 1 -->
+
+        <div class="step">
+
+            <div class="step-number">
+                1
+            </div>
+
+            <div class="step-icon">
+                🔍
+            </div>
+
+            <h3>
+                Search Product
+            </h3>
+
+            <p>
+                Find the product you want using our smart search.
+            </p>
+
+        </div>
+
+
+        <div class="step-arrow">
+            →
+        </div>
+
+
+        <!-- STEP 2 -->
+
+        <div class="step">
+
+            <div class="step-number">
+                2
+            </div>
+
+            <div class="step-icon">
+                💰
+            </div>
+
+            <h3>
+                Compare Prices
+            </h3>
+
+            <p>
+                See prices from Amazon and Flipkart.
+            </p>
+
+        </div>
+
+
+        <div class="step-arrow">
+            →
+        </div>
+
+
+        <!-- STEP 3 -->
+
+        <div class="step">
+
+            <div class="step-number">
+                3
+            </div>
+
+            <div class="step-icon">
+                🛒
+            </div>
+
+            <h3>
+                Choose & Save
+            </h3>
+
+            <p>
+                Pick the better deal and shop with confidence.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+
+<footer class="footer">
+
+
+    <div class="footer-brand">
+
+        <strong>
+            Price<span>Wise</span>
+        </strong>
 
         <p>
-            Powered by TF-IDF & Cosine Similarity
+            Compare prices. Save money. Shop wise.
         </p>
 
-    </footer>
+    </div>
 
 
-    <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
+    <div class="footer-links">
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+        <a href="/products">
+            Products
+        </a>
+
+        <a href="#">
+            Deals
+        </a>
+
+        <a href="#">
+            About
+        </a>
+
+    </div>
+
+
+    <p class="copyright">
+
+        © 2026 PriceWise. All rights reserved.
+
+    </p>
+
+
+</footer>
+
+
+
+<!-- ============================================================
+     PAGE 3 JAVASCRIPT
+============================================================ -->
+
+<script>
+
+function openCategory(category) {
+
+    if (category === "All") {
+
+        window.location.href =
+            "/category/All";
+
+    }
+
+    else {
+
+        window.location.href =
+            "/category/" +
+            encodeURIComponent(category);
+
+    }
+
+}
+
+
+function goToSearch() {
+
+    const input =
+        document.getElementById("searchInput");
+
+    const query =
+        input.value.trim();
+
+
+    if (query === "") {
+
+        window.location.href =
+            "/category/All";
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "/category/All?search=" +
+        encodeURIComponent(query);
+
+}
+
+
+function clearSearch() {
+
+    document.getElementById(
+        "searchInput"
+    ).value = "";
+
+}
+
+</script>
+
 
 </body>
+
 </html>
-```

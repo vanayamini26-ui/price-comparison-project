@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>PriceWise - Account</title>
+
+    <link
+        rel="stylesheet"
+        href="/login/login.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="login-page">
+
+
+        <!-- LEFT BRAND SECTION -->
+
+        <section class="brand-section">
+
+            <div class="brand-content">
+
+                <div class="brand-logo">
+
+                    <div class="brand-icon">
+                        🛍️
+                    </div>
+
+                    <div>
+
+                        <h1>
+                            Price<span>Wise</span>
+                        </h1>
+
+                        <p>
+                            The Wise Way to Shop
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="brand-message">
+
+                    <p class="brand-small">
+                        SMART SHOPPING
+                    </p>
+
+                    <h2>
+                        Shop smarter.
+                        <br>
+                        <span>Save more.</span>
+                    </h2>
+
+                    <p>
+                        Create your PriceWise account and
+                        compare electronic product prices
+                        from Amazon and Flipkart in one place.
+                    </p>
+
+                </div>
+
+
+                <div class="brand-points">
+
+                    <div>
+                        <span>✓</span>
+                        Compare prices easily
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        Find better deals
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        Make smarter shopping decisions
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- RIGHT ACCOUNT SECTION -->
+
+        <section class="account-section">
+
+            <div class="account-card">
+
+
+                <!-- SIGN UP -->
+
+                <div
+                    id="signupBox"
+                    class="form-box"
+                >
+
+                    <div class="form-heading">
+
+                        <p class="form-label">
+                            WELCOME TO PRICEWISE
+                        </p>
+
+                        <h2>
+                            Create your account
+                        </h2>
+
+                        <p>
+                            Sign up once and start comparing prices.
+                        </p>
+
+                    </div>
+
+
+                    <form id="signupForm">
+
+
+                        <div class="input-group">
+
+                            <label for="signupName">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="signupName"
+                                placeholder="Enter your name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label for="signupEmail">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="signupEmail"
+                                placeholder="Enter your email"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label for="signupPassword">
+                                Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="signupPassword"
+                                placeholder="Create a password"
+                                required
+                            >
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="primary-button"
+                        >
+
+                            Create Account
+
+                            <span>→</span>
+
+                        </button>
+
+
+                    </form>
+
+
+                    <p
+                        id="signupMessage"
+                        class="message"
+                    ></p>
+
+
+                    <div class="switch-text">
+
+                        Already have an account?
+
+                        <button
+                            type="button"
+                            onclick="showSignin()"
+                        >
+                            Sign In
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SIGN IN -->
+
+                <div
+                    id="signinBox"
+                    class="form-box hidden"
+                >
+
+                    <div class="form-heading">
+
+                        <p class="form-label">
+                            WELCOME BACK
+                        </p>
+
+                        <h2>
+                            Sign in to PriceWise
+                        </h2>
+
+                        <p>
+                            Continue your smart shopping journey.
+                        </p>
+
+                    </div>
+
+
+                    <form id="signinForm">
+
+
+                        <div class="input-group">
+
+                            <label for="signinEmail">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="signinEmail"
+                                placeholder="Enter your email"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label for="signinPassword">
+                                Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="signinPassword"
+                                placeholder="Enter your password"
+                                required
+                            >
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="primary-button"
+                        >
+
+                            Sign In
+
+                            <span>→</span>
+
+                        </button>
+
+
+                    </form>
+
+
+                    <p
+                        id="signinMessage"
+                        class="message"
+                    ></p>
+
+
+                    <div class="switch-text">
+
+                        New to PriceWise?
+
+                        <button
+                            type="button"
+                            onclick="showSignup()"
+                        >
+                            Create Account
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <p class="security-note">
+                    🔒 Your account information stays on this device.
+                </p>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <script src="/login/login.js"></script>
+
+</body>
+
+</html>
