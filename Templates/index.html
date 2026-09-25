@@ -73,6 +73,14 @@
                 About
             </a>
 
+            <button
+                type="button"
+                class="logout-button"
+                onclick="logoutUser()"
+            >
+                Logout
+            </button>
+
         </nav>
 
 
@@ -541,6 +549,11 @@
 
 <script>
 
+
+/* ============================================================
+   CATEGORY NAVIGATION
+============================================================ */
+
 function openCategory(category) {
 
     if (category === "All") {
@@ -560,6 +573,11 @@ function openCategory(category) {
 
 }
 
+
+
+/* ============================================================
+   SEARCH
+============================================================ */
 
 function goToSearch() {
 
@@ -587,6 +605,11 @@ function goToSearch() {
 }
 
 
+
+/* ============================================================
+   CLEAR SEARCH
+============================================================ */
+
 function clearSearch() {
 
     document.getElementById(
@@ -594,6 +617,24 @@ function clearSearch() {
     ).value = "";
 
 }
+
+
+
+/* ============================================================
+   LOGOUT
+============================================================ */
+
+function logoutUser() {
+
+    localStorage.removeItem(
+        "pricewiseLoggedIn"
+    );
+
+    window.location.href =
+        "/login";
+
+}
+
 
 </script>
 

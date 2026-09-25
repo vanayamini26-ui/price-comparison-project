@@ -1,13 +1,65 @@
-from flask import Flask, jsonify, request, render_template, send_from_directory
+from flask import (
+    Flask,
+    jsonify,
+    request,
+    render_template,
+    send_from_directory,
+    session,
+    redirect
+)
+
 from flask_cors import CORS
+
 import sqlite3
 import os
+
+
+# ============================================================
+# FLASK APPLICATION
+# ============================================================
 
 app = Flask(__name__)
 
 CORS(app)
 
+
+# ============================================================
+# SECURITY
+# ============================================================
+
+# IMPORTANT:
+# Change this secret before public deployment.
+# For now this is used for the admin session.
+
+app.secret_key = os.environ.get(
+    "PRICEWISE_SECRET_KEY",
+    "change-this-pricewise-secret-key"
+)
+
+
+# ============================================================
+# DATABASE
+# ============================================================
+
 DB_FILE = "processed_data/price_comparison.db"
+
+
+# ============================================================
+# ADMIN CONFIGURATION
+# ============================================================
+
+# Admin username and password are NOT connected to
+# the normal PriceWise signup system.
+
+ADMIN_USERNAME = os.environ.get(
+    "PRICEWISE_ADMIN_USERNAME",
+    "yamini vana"
+)
+
+ADMIN_PASSWORD = os.environ.get(
+    "PRICEWISE_ADMIN_PASSWORD",
+    "Yamini@26"
+)
 
 
 # ============================================================
@@ -21,6 +73,15 @@ def get_db_connection():
     connection.row_factory = sqlite3.Row
 
     return connection
+
+
+# ============================================================
+# ADMIN AUTHENTICATION HELPER
+# ============================================================
+
+def admin_required():
+
+    return session.get("pricewise_admin") is True
 
 
 # ============================================================
@@ -126,10 +187,167 @@ def product_page(product_id):
 
 
 # ============================================================
+# ADMIN PAGE - LOGIN
+# ============================================================
+
+@app.route("/admin/login")
+def admin_login_page():
+
+    if admin_required():
+
+        return redirect("/admin")
+
+    return render_template(
+        "admin_login.html"
+    )
+
+
+# ============================================================
+# ADMIN API - LOGIN
+# ============================================================
+
+@app.route(
+    "/api/admin/login",
+    methods=["POST"]
+)
+def admin_login():
+
+    data = request.get_json()
+
+    if not data:
+
+        return jsonify({
+
+            "status": "error",
+
+            "message": "Invalid request"
+
+        }), 400
+
+    username = data.get(
+        "username",
+        ""
+    ).strip()
+
+    password = data.get(
+        "password",
+        ""
+    )
+
+
+    if (
+        username == ADMIN_USERNAME
+        and password == ADMIN_PASSWORD
+    ):
+
+        session["pricewise_admin"] = True
+
+        session["pricewise_admin_username"] = username
+
+        return jsonify({
+
+            "status": "success",
+
+            "message": "Admin login successful"
+
+        })
+
+
+    return jsonify({
+
+        "status": "error",
+
+        "message": "Invalid admin username or password"
+
+    }), 401
+
+
+# ============================================================
+# ADMIN PAGE - DASHBOARD
+# ============================================================
+
+@app.route("/admin")
+def admin_dashboard():
+
+    if not admin_required():
+
+        return redirect("/admin/login")
+
+    return render_template(
+        "admin.html"
+    )
+
+
+# ============================================================
+# ADMIN API - CHECK LOGIN
+# ============================================================
+
+@app.route(
+    "/api/admin/check",
+    methods=["GET"]
+)
+def admin_check():
+
+    if not admin_required():
+
+        return jsonify({
+
+            "status": "error",
+
+            "authenticated": False
+
+        }), 401
+
+    return jsonify({
+
+        "status": "success",
+
+        "authenticated": True,
+
+        "username": session.get(
+            "pricewise_admin_username"
+        )
+
+    })
+
+
+# ============================================================
+# ADMIN API - LOGOUT
+# ============================================================
+
+@app.route(
+    "/api/admin/logout",
+    methods=["POST"]
+)
+def admin_logout():
+
+    session.pop(
+        "pricewise_admin",
+        None
+    )
+
+    session.pop(
+        "pricewise_admin_username",
+        None
+    )
+
+    return jsonify({
+
+        "status": "success",
+
+        "message": "Admin logged out successfully"
+
+    })
+
+
+# ============================================================
 # API - ALL PRODUCTS
 # ============================================================
 
-@app.route("/api/products", methods=["GET"])
+@app.route(
+    "/api/products",
+    methods=["GET"]
+)
 def get_products():
 
     connection = get_db_connection()
@@ -149,9 +367,13 @@ def get_products():
     ]
 
     return jsonify({
+
         "status": "success",
+
         "count": len(result),
+
         "products": result
+
     })
 
 
@@ -201,7 +423,10 @@ def get_product(product_id):
 # API - SEARCH
 # ============================================================
 
-@app.route("/api/search", methods=["GET"])
+@app.route(
+    "/api/search",
+    methods=["GET"]
+)
 def search_products():
 
     query = request.args.get(
@@ -443,6 +668,16 @@ if __name__ == "__main__":
         print()
 
         print(
+            "Admin:"
+        )
+
+        print(
+            "http://127.0.0.1:5000/admin"
+        )
+
+        print()
+
+        print(
             "Category:"
         )
 
@@ -458,16 +693,6 @@ if __name__ == "__main__":
 
         print(
             "http://127.0.0.1:5000/product/1"
-        )
-
-        print()
-
-        print(
-            "Phone URL:"
-        )
-
-        print(
-            "http://10.14.11.218:5000"
         )
 
         print()

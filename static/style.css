@@ -960,3 +960,59 @@ body {
     }
 
 }
+/* ============================================================
+   LOGOUT BUTTON
+============================================================ */
+
+.logout-button {
+    border: 1px solid #6366f1;
+    background: #ffffff;
+    color: #6366f1;
+
+    padding: 9px 17px;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.logout-button:hover {
+    background: #6366f1;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.logout-button:active {
+    transform: translateY(0);
+}
+
+
+/* ============================================================
+   MOBILE NAVIGATION
+============================================================ */
+
+@media (max-width: 700px) {
+
+    .desktop-nav {
+        gap: 10px;
+    }
+
+    .desktop-nav a {
+        font-size: 13px;
+    }
+
+    .logout-button {
+        padding: 8px 13px;
+        font-size: 13px;
+    }
+
+}
